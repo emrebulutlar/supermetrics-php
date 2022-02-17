@@ -11,24 +11,24 @@ class StatisticsTo
 {
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $name;
+    private ?string $name = null;
 
     /**
-     * @var float
+     * @var float|null
      */
-    private float $value;
+    private ?float $value = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $splitPeriod;
+    private ?string $splitPeriod = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $units;
+    private ?string $units = null;
 
     /**
      * @var StatisticsTo[]

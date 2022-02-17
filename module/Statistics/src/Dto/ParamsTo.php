@@ -13,19 +13,19 @@ class ParamsTo
 {
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $statName;
+    private ?string $statName;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    private DateTime $startDate;
+    private ?DateTime $startDate;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    private DateTime $endDate;
+    private ?DateTime $endDate;
 
     /**
      * @return string|null

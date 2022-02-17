@@ -2,6 +2,7 @@
 
 namespace SocialPost\Client\Factory;
 
+use App\Env\Env;
 use GuzzleHttp\Client;
 use SocialPost\Cache\Factory\CacheFactory;
 use SocialPost\Client\FictionalClient;
@@ -10,7 +11,6 @@ use SocialPost\Client\SocialClientInterface;
 
 /**
  * Class FictionalClientFactory
- *
  * @package SocialPost\Client\Factory
  */
 class FictionalClientFactory
@@ -27,7 +27,7 @@ class FictionalClientFactory
 
         $fallbackClient = new FictionalClient(
             $guzzleClient,
-            $_ENV['FICTIONAL_SOCIAL_API_CLIENT_ID']
+            Env::get('FICTIONAL_SOCIAL_API_CLIENT_ID')
         );
 
         try {
@@ -50,7 +50,7 @@ class FictionalClientFactory
     {
         return new Client(
             [
-                'base_uri' => $_ENV['FICTIONAL_SOCIAL_API_HOST'],
+                'base_uri' => Env::get('FICTIONAL_SOCIAL_API_HOST'),
             ]
         );
     }
