@@ -5,12 +5,15 @@ services:
     image: php_assignment:latest
     container_name: php_assignment
     restart: "no"
+    command: bash -c "composer install -n && apache2-foreground"
     build:
       context: ./
       dockerfile: Dockerfile
       target: local
     ports:
       - "7777:80"
+    volumes:
+      - ./:/app
 
 networks:
   default:
