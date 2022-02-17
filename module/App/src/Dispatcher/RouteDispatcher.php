@@ -23,7 +23,8 @@ class RouteDispatcher
 
         list($path, $query) = array_pad($parts, 2, null);
 
-        parse_str($query, $params);
+        // cast it to a string, so we don't get any deprecation problems
+        parse_str((string)$query, $params);
 
         $routes = Config::get('routes');
         if (!array_key_exists($path, $routes)) {
