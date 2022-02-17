@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Env\Env;
 use DateTime;
 use SocialPost\Service\SocialPostService;
 use Statistics\Builder\ParamsBuilder;
@@ -11,24 +12,23 @@ use Statistics\Service\StatisticsService;
 
 /**
  * Class StatisticsController
- *
  * @package App\Controller
  */
 class StatisticsController extends Controller
 {
 
     private const STAT_LABELS = [
-        StatsEnum::TOTAL_POSTS_PER_WEEK         => 'Total posts split by week',
+        StatsEnum::TOTAL_POSTS_PER_WEEK => 'Total posts split by week',
         StatsEnum::AVERAGE_POST_NUMBER_PER_USER => 'Average number of posts per user in a given month',
-        StatsEnum::AVERAGE_POST_LENGTH          => 'Average character length/post in a given month',
-        StatsEnum::MAX_POST_LENGTH              => 'Longest post by character length in a given month',
+        StatsEnum::AVERAGE_POST_LENGTH => 'Average character length/post in a given month',
+        StatsEnum::MAX_POST_LENGTH => 'Longest post by character length in a given month',
     ];
 
     /**
      * StatisticsController constructor.
      *
-     * @param StatisticsService     $statsService
-     * @param SocialPostService     $socialService
+     * @param StatisticsService $statsService
+     * @param SocialPostService $socialService
      * @param StatisticsToExtractor $extractor
      */
     public function __construct(
@@ -44,7 +44,7 @@ class StatisticsController extends Controller
     public function indexAction(array $params)
     {
         try {
-            $date   = $this->extractDate($params);
+            $date = $this->extractDate($params);
             $params = ParamsBuilder::reportStatsParams($date);
 
             $posts = $this->socialService->fetchPosts();
@@ -56,7 +56,9 @@ class StatisticsController extends Controller
         } catch (\Throwable $throwable) {
             http_response_code(500);
 
-            $response = ['message' => 'An error occurred'];
+            $response = [
+                'message' => Env::isLocal() ? $throwable->getMessage() : 'An error occurred',
+            ];
         }
 
         $this->render($response, 'json', false);
@@ -70,7 +72,7 @@ class StatisticsController extends Controller
     private function extractDate(array $params): DateTime
     {
         $month = $params['month'] ?? null;
-        $date  = DateTime::createFromFormat('F, Y', $month);
+        $date = DateTime::createFromFormat('F, Y', $month);
 
         if (false === $date) {
             $date = new DateTime();
