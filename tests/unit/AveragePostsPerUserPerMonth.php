@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
  *
  * @package Tests\unit
  */
-class TestTest extends TestCase
+class AveragePostsPerUserPerMonth extends TestCase
 {
     /**
      * @test
      */
-    public function testNothing(): void
+    public function testIfStaticsAveragePostsPerUserPerMonthCalculates(): void
     {
         $this->assertTrue(true);
     }

@@ -14,7 +14,7 @@ class StatsEnum
 
     public const MAX_POST_LENGTH = 'max-character-length';
 
-    public const TOTAL_POSTS_PER_WEEK = 'total-posts-per-week';
+    public const AVERAGE_POST_NUMBER_PER_USER = 'average-posts-by-user-per-month';
 
-    public const AVERAGE_POST_NUMBER_PER_USER = 'average-posts-per-user';
+    public const TOTAL_POSTS_PER_WEEK = 'total-posts-per-week';
 }
