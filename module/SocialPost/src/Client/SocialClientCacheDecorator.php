@@ -3,6 +3,7 @@
 namespace SocialPost\Client;
 
 use Closure;
+use GuzzleHttp\Utils;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 
@@ -18,21 +19,6 @@ class SocialClientCacheDecorator implements SocialClientInterface
     private const CACHE_TTL = 60 * 60; //hour
 
     /**
-     * @var SocialClientInterface
-     */
-    private $fallbackClient;
-
-    /**
-     * @var CacheInterface
-     */
-    private $cache;
-
-    /**
-     * @var string
-     */
-    private $cachePrefix;
-
-    /**
      * SocialDriverCacheDecorator constructor.
      *
      * @param SocialClientInterface $fallbackClient
@@ -40,13 +26,10 @@ class SocialClientCacheDecorator implements SocialClientInterface
      * @param string                $cachePrefix
      */
     public function __construct(
-        SocialClientInterface $fallbackClient,
-        CacheInterface $cache,
-        string $cachePrefix
+        private readonly SocialClientInterface $fallbackClient,
+        private readonly CacheInterface $cache,
+        private readonly string $cachePrefix
     ) {
-        $this->fallbackClient = $fallbackClient;
-        $this->cache          = $cache;
-        $this->cachePrefix    = $cachePrefix;
     }
 
     /**
@@ -122,7 +105,7 @@ class SocialClientCacheDecorator implements SocialClientInterface
                 '%s-%s-%s',
                 $this->cachePrefix,
                 $url,
-                json_encode($parameters)
+                Utils::jsonEncode($parameters)
             )
         );
     }

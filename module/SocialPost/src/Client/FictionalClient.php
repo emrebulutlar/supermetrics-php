@@ -6,41 +6,30 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Utils;
 use SocialPost\Exception\InvalidTokenException;
 
 /**
  * Class FictionalClient
- *
  * @package SocialPost\Client
  */
 class FictionalClient implements SocialClientInterface
 {
-
-    /**
-     * @var string
-     */
-    private $clientId;
-
-    /**
-     * @var Client
-     */
-    private $client;
-
     /**
      * FictionalSocialApiClient constructor.
      *
      * @param Client $client
      * @param string $clientId
      */
-    public function __construct(Client $client, string $clientId)
-    {
-        $this->clientId = $clientId;
-        $this->client   = $client;
+    public function __construct(
+        private readonly Client $client,
+        private readonly string $clientId
+    ) {
     }
 
     /**
      * @param string $url
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return string
      * @throws GuzzleException
@@ -52,7 +41,7 @@ class FictionalClient implements SocialClientInterface
 
     /**
      * @param string $url
-     * @param array  $body
+     * @param array $body
      *
      * @return string
      * @throws GuzzleException
@@ -66,7 +55,7 @@ class FictionalClient implements SocialClientInterface
 
     /**
      * @param string $url
-     * @param array  $body
+     * @param array $body
      *
      * @return string
      * @throws GuzzleException
@@ -81,9 +70,9 @@ class FictionalClient implements SocialClientInterface
     /**
      * @param string $method
      * @param string $url
-     * @param array  $headers
-     * @param array  $parameters
-     * @param array  $body
+     * @param array $headers
+     * @param array $parameters
+     * @param array $body
      *
      * @return string
      * @throws GuzzleException
@@ -108,9 +97,7 @@ class FictionalClient implements SocialClientInterface
             throw $exception;
         }
 
-        $contents = $response->getBody()->getContents();
-
-        return $contents;
+        return $response->getBody()->getContents();
     }
 
     /**
@@ -120,7 +107,7 @@ class FictionalClient implements SocialClientInterface
      */
     protected function isTokenInvalid(ServerException $exception): bool
     {
-        $response = \GuzzleHttp\json_decode(
+        $response = Utils::jsonDecode(
             $exception->getResponse()->getBody()->getContents(),
             true
         );

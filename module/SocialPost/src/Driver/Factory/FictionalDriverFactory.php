@@ -6,6 +6,7 @@ use SocialPost\Cache\Factory\CacheFactory;
 use SocialPost\Client\Factory\FictionalClientFactory;
 use SocialPost\Driver\FictionalDriver;
 use SocialPost\Driver\SocialDriverInterface;
+use Throwable;
 
 /**
  * Class FictionalSocialDriverFactory
@@ -22,7 +23,7 @@ class FictionalDriverFactory
     {
         try {
             $cache = CacheFactory::create();
-        } catch (\Throwable $throwable) {
+        } catch (Throwable $throwable) {
             //Cache not ready :(
             $cache = null;
         }

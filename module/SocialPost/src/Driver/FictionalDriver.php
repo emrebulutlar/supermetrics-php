@@ -2,6 +2,7 @@
 
 namespace SocialPost\Driver;
 
+use GuzzleHttp\Utils;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use SocialPost\Client\SocialClientInterface;
@@ -106,7 +107,7 @@ class FictionalDriver implements SocialDriverInterface
             ]
         );
 
-        return \GuzzleHttp\json_decode($response, true);
+        return Utils::jsonDecode($response, true);
     }
 
     /**
@@ -122,16 +123,14 @@ class FictionalDriver implements SocialDriverInterface
         ];
 
         $response = $this->client->authRequest(self::REGISTER_TOKEN_URI, $userData);
-        $response = \GuzzleHttp\json_decode($response, true);
+        $response = Utils::jsonDecode($response, true);
 
         $token = $response['data']['sl_token'] ?? null;
         if (null === $token) {
             throw new BadResponseException('No access token returned');
         }
 
-        if (null !== $this->cache) {
-            $this->cache->set(self::TOKEN_CACHE_KEY, $token, self::TOKEN_CACHE_TTL);
-        }
+        $this->cache?->set(self::TOKEN_CACHE_KEY, $token, self::TOKEN_CACHE_TTL);
 
         return $token;
     }
@@ -142,10 +141,7 @@ class FictionalDriver implements SocialDriverInterface
      */
     protected function getAccessToken(): string
     {
-        $token = null;
-        if (null !== $this->cache) {
-            $token = $this->cache->get(self::TOKEN_CACHE_KEY);
-        }
+        $token = $this->cache?->get(self::TOKEN_CACHE_KEY);
 
         if (null === $token) {
             $token = $this->registerToken();

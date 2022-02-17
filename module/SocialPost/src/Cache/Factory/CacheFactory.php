@@ -2,6 +2,7 @@
 
 namespace SocialPost\Cache\Factory;
 
+use Exception;
 use Memcached;
 use Psr\SimpleCache\CacheInterface;
 
@@ -14,12 +15,12 @@ class CacheFactory
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      * @return CacheInterface
      */
     public static function create(): CacheInterface
     {
-        throw new \Exception('No cache :(');
+        throw new Exception('No cache :(');
     }
 
     /**
