@@ -25,21 +25,6 @@ class StatisticsController extends Controller
     ];
 
     /**
-     * @var StatisticsService
-     */
-    private $statsService;
-
-    /**
-     * @var SocialPostService
-     */
-    private $socialService;
-
-    /**
-     * @var StatisticsToExtractor
-     */
-    private $extractor;
-
-    /**
      * StatisticsController constructor.
      *
      * @param StatisticsService     $statsService
@@ -47,13 +32,10 @@ class StatisticsController extends Controller
      * @param StatisticsToExtractor $extractor
      */
     public function __construct(
-        StatisticsService $statsService,
-        SocialPostService $socialService,
-        StatisticsToExtractor $extractor
+        private readonly StatisticsService $statsService,
+        private readonly SocialPostService $socialService,
+        private readonly StatisticsToExtractor $extractor
     ) {
-        $this->statsService  = $statsService;
-        $this->socialService = $socialService;
-        $this->extractor     = $extractor;
     }
 
     /**

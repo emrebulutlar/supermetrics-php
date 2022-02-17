@@ -13,27 +13,27 @@ class StatisticsTo
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var float
      */
-    private $value;
+    private float $value;
 
     /**
      * @var string
      */
-    private $splitPeriod;
+    private string $splitPeriod;
 
     /**
      * @var string
      */
-    private $units;
+    private string $units;
 
     /**
      * @var StatisticsTo[]
      */
-    private $children = [];
+    private array $children = [];
 
     /**
      * @return string|null

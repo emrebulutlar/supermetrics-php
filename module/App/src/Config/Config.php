@@ -4,7 +4,6 @@ namespace App\Config;
 
 /**
  * Class Config
- *
  * @package App\Config
  */
 class Config
@@ -13,12 +12,12 @@ class Config
     /**
      * @var bool
      */
-    private static $initialised = false;
+    private static bool $initialised = false;
 
     /**
      * @var array
      */
-    private static $config = [];
+    private static array $config = [];
 
     /**
      * @return void
@@ -38,7 +37,7 @@ class Config
      *
      * @return mixed
      */
-    public static function get(string $key)
+    public static function get(string $key): mixed
     {
         if (false === static::$initialised) {
             static::init();

@@ -2,6 +2,7 @@
 
 namespace Statistics\Calculator;
 
+use JetBrains\PhpStorm\Pure;
 use SocialPost\Dto\SocialPostTo;
 use Statistics\Dto\ParamsTo;
 use Statistics\Dto\StatisticsTo;
@@ -19,7 +20,7 @@ abstract class AbstractCalculator implements CalculatorInterface
     /**
      * @var ParamsTo
      */
-    protected $parameters;
+    protected ParamsTo $parameters;
 
     /**
      * @param ParamsTo $params
@@ -60,7 +61,7 @@ abstract class AbstractCalculator implements CalculatorInterface
      *
      * @return bool
      */
-    protected function checkPost(SocialPostTo $postTo): bool
+    #[Pure] protected function checkPost(SocialPostTo $postTo): bool
     {
         if (null !== $this->parameters->getStartDate()
             && $this->parameters->getStartDate() > $postTo->getDate()

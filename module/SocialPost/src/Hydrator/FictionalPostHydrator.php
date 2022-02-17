@@ -3,6 +3,7 @@
 namespace SocialPost\Hydrator;
 
 use DateTime;
+use DateTimeInterface;
 use SocialPost\Dto\SocialPostTo;
 
 /**
@@ -13,7 +14,7 @@ use SocialPost\Dto\SocialPostTo;
 class FictionalPostHydrator implements SocialPostHydratorInterface
 {
 
-    private const POST_CREATED_DATE_FORMAT = DateTime::ATOM;
+    private const POST_CREATED_DATE_FORMAT = DateTimeInterface::ATOM;
 
     /**
      * @param array $postData
@@ -22,15 +23,13 @@ class FictionalPostHydrator implements SocialPostHydratorInterface
      */
     public function hydrate(array $postData): SocialPostTo
     {
-        $dto = (new SocialPostTo())
+        return (new SocialPostTo())
             ->setId($postData['id'] ?? null)
             ->setAuthorName($postData['from_name'] ?? null)
             ->setAuthorId($postData['from_id'] ?? null)
             ->setText($postData['message'] ?? null)
             ->setType($postData['type'] ?? null)
             ->setDate($this->hydrateDate($postData['created_time'] ?? null));
-
-        return $dto;
     }
 
     /**

@@ -4,32 +4,20 @@ namespace SocialPost\Dto;
 
 /**
  * Class ParamsTo
- *
  * @package SocialPost\Dto
  */
 class FetchParamsTo
 {
-
-    /**
-     * @var int
-     */
-    private $pageLimit;
-
-    /**
-     * @var int
-     */
-    private $pageOffset;
-
     /**
      * FetchParamsTo constructor.
      *
      * @param int $pageLimit
      * @param int $pageOffset
      */
-    public function __construct(int $pageLimit, int $pageOffset = 1)
-    {
-        $this->pageLimit  = $pageLimit;
-        $this->pageOffset = $pageOffset;
+    public function __construct(
+        private readonly int $pageLimit,
+        private readonly int $pageOffset = 1
+    ) {
     }
 
     /**

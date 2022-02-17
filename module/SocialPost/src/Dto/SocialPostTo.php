@@ -6,41 +6,40 @@ use DateTime;
 
 /**
  * Class SocialPostTo
- *
  * @package SocialPost\Dto
  */
 class SocialPostTo
 {
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $id;
+    private ?string $id;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $authorId;
+    private ?string $authorId;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $authorName;
+    private ?string $authorName;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $text;
+    private ?string $text;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $type;
+    private ?string $type;
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
-    private $date;
+    private ?DateTime $date;
 
     /**
      * @return string|null

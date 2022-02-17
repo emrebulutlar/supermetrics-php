@@ -2,6 +2,7 @@
 
 namespace SocialPost\Service;
 
+use JetBrains\PhpStorm\Pure;
 use SocialPost\Driver\SocialDriverInterface;
 use SocialPost\Dto\FetchParamsTo;
 use SocialPost\Hydrator\SocialPostHydratorInterface;
@@ -9,7 +10,6 @@ use Traversable;
 
 /**
  * Class SocialPostService
- *
  * @package SocialPost\Service
  */
 class SocialPostService
@@ -20,31 +20,19 @@ class SocialPostService
     private const DEFAULT_OFFSET = 1;
 
     /**
-     * @var SocialDriverInterface
-     */
-    private $driver;
-
-    /**
-     * @var SocialPostHydratorInterface
-     */
-    private $hydrator;
-
-    /**
      * SocialPostService constructor.
      *
-     * @param SocialDriverInterface       $driver
+     * @param SocialDriverInterface $driver
      * @param SocialPostHydratorInterface $hydrator
      */
     public function __construct(
-        SocialDriverInterface $driver,
-        SocialPostHydratorInterface $hydrator
+        private readonly SocialDriverInterface $driver,
+        private readonly SocialPostHydratorInterface $hydrator
     ) {
-        $this->driver   = $driver;
-        $this->hydrator = $hydrator;
     }
 
     /**
-     * @param FetchParamsTo $fetchParams
+     * @param FetchParamsTo|null $fetchParams
      *
      * @return Traversable
      */
@@ -66,7 +54,7 @@ class SocialPostService
     /**
      * @return FetchParamsTo
      */
-    private function getDefaultParams(): FetchParamsTo
+    #[Pure] private function getDefaultParams(): FetchParamsTo
     {
         return new FetchParamsTo(self::DEFAULT_LIMIT, self::DEFAULT_OFFSET);
     }

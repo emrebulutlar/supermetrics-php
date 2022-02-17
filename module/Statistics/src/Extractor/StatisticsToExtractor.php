@@ -20,9 +20,7 @@ class StatisticsToExtractor
      */
     public function extract(StatisticsTo $statisticsTo, array $labels): array
     {
-        $label = isset($labels[$statisticsTo->getName()])
-            ? $labels[$statisticsTo->getName()]
-            : null;
+        $label = $labels[$statisticsTo->getName()] ?? null;
 
         $extracted = [
             'name'        => $statisticsTo->getName(),

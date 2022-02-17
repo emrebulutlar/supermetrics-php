@@ -10,30 +10,24 @@ use Traversable;
 
 /**
  * Class PostStatisticsService
- *
  * @package Statistics
  */
 class StatisticsService
 {
 
     /**
-     * @var StatisticsCalculatorFactory
-     */
-    private $factory;
-
-    /**
      * StatisticsService constructor.
      *
      * @param StatisticsCalculatorFactory $factory
      */
-    public function __construct(StatisticsCalculatorFactory $factory)
-    {
-        $this->factory = $factory;
+    public function __construct(
+        private readonly StatisticsCalculatorFactory $factory
+    ) {
     }
 
     /**
      * @param Traversable $posts
-     * @param ParamsTo[]  $params
+     * @param ParamsTo[] $params
      *
      * @return StatisticsTo
      */

@@ -26,14 +26,9 @@ class FictionalDriver implements SocialDriverInterface
     private const TOKEN_CACHE_TTL = 60 * 59; // a bit less than an hour
 
     /**
-     * @var SocialClientInterface
-     */
-    private $client;
-
-    /**
      * @var CacheInterface
      */
-    private $cache;
+    private CacheInterface $cache;
 
     /**
      * FictionalSocialApiDriver constructor.
@@ -41,9 +36,8 @@ class FictionalDriver implements SocialDriverInterface
      * @param SocialClientInterface $client
      */
     public function __construct(
-        SocialClientInterface $client
+        private readonly SocialClientInterface $client
     ) {
-        $this->client = $client;
     }
 
     /**

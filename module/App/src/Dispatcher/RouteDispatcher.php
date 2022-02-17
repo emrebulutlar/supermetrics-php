@@ -5,10 +5,10 @@ namespace App\Dispatcher;
 use App\Config\Config;
 use App\Controller\ControllerInterface;
 use App\Controller\Factory\ControllerFactoryInterface;
+use RuntimeException;
 
 /**
  * Class RouteDispatcher
- *
  * @package App\Dispatcher
  */
 class RouteDispatcher
@@ -57,12 +57,12 @@ class RouteDispatcher
 
             $factory = new $factoryClass();
             if (!$factory instanceof ControllerFactoryInterface) {
-                throw new \RuntimeException(sprintf('Wrong factory registered for %s', $name));
+                throw new RuntimeException(sprintf('Wrong factory registered for %s', $name));
             }
 
             return $factory->create();
         }
 
-        throw new \RuntimeException(sprintf('Unable instantiate controller %s', $name));
+        throw new RuntimeException(sprintf('Unable instantiate controller %s', $name));
     }
 }
