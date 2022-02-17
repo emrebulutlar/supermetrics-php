@@ -11,8 +11,6 @@ $dotEnv->load();
 
 Config::init();
 
-define('ENVIRONMENT', $_ENV['ENVIRONMENT'] ?? 'production');
-
 $requestUri = $_SERVER['REQUEST_URI'];
 
 RouteDispatcher::dispatch($requestUri);

@@ -2,8 +2,6 @@
 
 namespace App\Env;
 
-use const ENVIRONMENT;
-
 class Env
 {
 
@@ -12,7 +10,7 @@ class Env
      */
     public static function isLocal(): bool
     {
-        return ENVIRONMENT === 'development';
+        return isset($_ENV["APP_ENV"]) && $_ENV["APP_ENV"] === 'local';
     }
 
     /**
