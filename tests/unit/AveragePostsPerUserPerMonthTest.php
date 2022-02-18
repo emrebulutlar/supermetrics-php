@@ -8,7 +8,6 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 use SocialPost\Dto\SocialPostTo;
 use SocialPost\Hydrator\FictionalPostHydrator;
-use Statistics\Calculator\AveragePostsPerUserPerMonth;
 use Statistics\Dto\ParamsTo;
 use Statistics\Dto\StatisticsTo;
 use Statistics\Enum\StatsEnum;
@@ -67,7 +66,8 @@ class AveragePostsPerUserPerMonthTest extends TestCase
 
     }
 
-    public function testIfStaticsAveragePostsPerUserPerMonthNotCalculates(){
+    public function testIfStaticsAveragePostsPerUserPerMonthNotCalculates()
+    {
 
         $statsService = StatisticsServiceFactory::create();
 
