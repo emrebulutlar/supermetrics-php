@@ -15,12 +15,18 @@ class AveragePostsPerUserPerMonth extends AbstractCalculator
 
     protected function doAccumulate(SocialPostTo $postTo): void
     {
-        $this->users[$postTo->getAuthorId()] = $postTo->getAuthorId();
+        $this->users[$postTo->getAuthorId()] = null;
         $this->totalPosts++;
     }
 
     protected function doCalculate(): StatisticsTo
     {
-        return (new StatisticsTo())->setValue( $this->totalPosts / count($this->users));
+        $userCount = count($this->users);
+
+        if ($userCount === 0) {
+            return (new StatisticsTo())->setValue(0);
+        }
+
+        return (new StatisticsTo())->setValue($this->totalPosts / $userCount);
     }
 }
